@@ -1,14 +1,12 @@
 #include <iostream>
 using namespace std;
 #include <algorithm>
-int maxi(int arr[], int idx, int n){
-        if(idx = n)
-            return arr[idx];
-        int misa = max(arr, idx+1);
-        if(misa>arr[idx])
-            return arr[idx];
-        else 
-            return misa;    
+int maxi(int arr[], int idx, int n)
+{
+    // if n = 0 means whole array has been traversed
+    if (!n)
+        return arr[0];
+    return max(arr[n-1], maxi(arr, n-1,n));
 }
 
 int main(){
