@@ -1,7 +1,7 @@
 class Solution {
 public:
 int findComplement(int num) {
-	int k = int(log2(num));
-	int mask = pow(2,k+1) - 1;
-	return num^mask;
+	int num_bits = int(log2(num));
+	int comple = pow(2,num_bits+1) - 1;
+	return num^comple;
 }};
