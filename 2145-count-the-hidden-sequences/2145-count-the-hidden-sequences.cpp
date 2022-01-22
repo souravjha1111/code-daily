@@ -1,8 +1,8 @@
 // class Solution {
 // public:
 //     int numberOfArrays(vector<int>& differences, int lower, int upper) {
-//         int curr_max = 0;
-//         int curr_min=0;
+//         int curr_max = differences[0];
+//         int curr_min=differences[0];
 //         vector<int> res;
 //         res.push_back(0);
 //             for(int i=1; i<differences.size(); i++){
