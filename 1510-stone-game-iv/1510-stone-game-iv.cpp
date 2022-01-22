@@ -27,3 +27,4 @@ public:
         return stones[n];
     }
 };
+//copied
