@@ -1,7 +1,8 @@
 class Solution {
-public:
+private:
     int count=0;
     int ans=0;
+public:
     int kthSmallest(TreeNode* root, int k) {
         if(root){
             kthSmallest(root->left,k);
