@@ -1,45 +1,28 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
-ListNode* mergeTwoLists(ListNode* a, ListNode* b){
-        if(a==NULL) return b;
-        if(b==NULL) return a;
-        ListNode* head=NULL;
-        if(a->val <= b->val)
-        {   head=a;
-            head->next = mergeTwoLists(a->next, b);
-            
+    struct compare
+    {
+        bool operator()(ListNode* &a,ListNode* &b)
+        {
+            return a->val>b->val;
         }
-        else{
-            head=b;
-            head->next = mergeTwoLists(a, b->next);
-            
-        }
-        return head;
-    }
-    
+    };
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        if(lists.size()==0){
-            return NULL;
+        priority_queue<ListNode*,vector<ListNode*>,compare>minh;
+        for(int i=0;i<lists.size();i++)
+        {
+           if(lists[i]!=NULL) minh.push(lists[i]);
         }
-        if(lists.size()==1){
-            return lists[0];
+        ListNode* head=new ListNode(0);
+        ListNode* temp=head;
+        while(minh.size()>0)
+        {
+            ListNode* p=minh.top();
+            minh.pop();
+            temp->next=new ListNode(p->val);
+            temp=temp->next;
+            if(p->next!=NULL) minh.push(p->next);
         }
-        
-        ListNode* res=lists[0];
-        
-        for(int i=1;i<lists.size();i++){
-            res=mergeTwoLists(res,lists[i]);
-            
-        }
-        return res;
-    }};
+        return head->next;
+    }
+};
