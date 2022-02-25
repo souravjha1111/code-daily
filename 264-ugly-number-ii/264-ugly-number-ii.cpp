@@ -4,11 +4,11 @@
 //         int res =0;
 //         if(n==1)
 //             return 1;
-//         map<int, bool> mp;
-//         mp[2] = true;
-//         mp[1] = true;
-//         mp[3] = true;
-//         mp[5] = true;
+//         map<float, bool> mp;
+//         mp[2.0] = true;
+//         mp[1.0] = true;
+//         mp[3.0] = true;
+//         mp[5.0] = true;
 //         int i =0;
 //         while(n>-1){
 //             if(mp.find(i)!=mp.end()){
@@ -31,7 +31,7 @@
 //         }
 //         return i;
 //     }
-// };
+//};
 class Solution {
 public:
     int nthUglyNumber(int n) {
