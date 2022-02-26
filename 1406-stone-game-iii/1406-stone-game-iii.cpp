@@ -7,9 +7,9 @@ public:
         while(i>=0){
             int ans = INT_MIN;
             ans = max(ans, s[i]-one);
-            if(i+1<s.size())
+            if(i+1<n)
             ans = max(ans, s[i]+ s[i+1]-two);
-            if(i+2<s.size())
+            if(i+2<n)
             ans = max(ans, s[i]+s[i+1] + s[i+2]-three);
             three = two;
             two  =one;
