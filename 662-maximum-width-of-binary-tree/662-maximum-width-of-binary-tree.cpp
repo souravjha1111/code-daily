@@ -1,57 +1,45 @@
 class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
-        if(!root)
+        if(root == NULL)
             return 0;
-        int ans=1;
+        
+        int res = 1;
         queue<pair<TreeNode*, int>> q;
-        q.push({root, 0});
-        while(!q.empty()){
-            int size = q.size();
+        
+        // I am using intialising list
+        q.push({root, 0});      // also can use make_pair
+        
+        while(!q.empty())
+        {
+            int cnt = q.size();
+            // start is the index of root node for first level
             int start = q.front().second;
             int end = q.back().second;
-            ans = max(ans, end-start+1);
-            for(int i=0; i<size; i++){
-                pair<TreeNode*, int> p =q.front();
-                int idx = p.second-start;
+            
+            res = max(res,end-start + 1);
+            
+            for(int i = 0; i <cnt; ++i)
+            {
+                pair<TreeNode*, int> p = q.front();
+                // we will use it while inserting it children
+                // left child will be 2 * idx + 1;
+                // right chils will be 2 * idx + 2;
+                int idx = p.second - start;
                 
                 q.pop();
-                if(p.first->left)
-                    q.push({p.first->left, idx*2+1});
-                if(p.first->right)
-                    q.push({p.first->right, idx*2+2});
+                
+                // if  left child exist
+                if(p.first->left != NULL)
+                    q.push({p.first->left, (long long)2 * idx + 1});
+                
+                // if right child exist
+                if(p.first->right != NULL)
+                    q.push({p.first->right, (long long) 2 * idx + 2});
             }
         }
-        return ans;
+        
+        return res;
+        
     }
 };
-
-
-
-
-
-
-// class Solution {
-// public:
-//     int widthOfBinaryTree(TreeNode* root) {
-//         if(root->left ==NULL && root->right ==NULL)
-//             return 1;
-//         queue<TreeNode* > q;
-//         q.push(root);
-//         int res =0;
-//         while(q.size()){
-//             int size = q.size();
-//             res = max(res, size);
-//             while(size--){
-//                 TreeNode* top = q.front();
-//                 q.pop();
-//                 if(top )
-//                 {if( top->left || top->right){
-//                     q.push(top->left);
-//                     q.push(top->right);
-//                 }}
-//             }
-//         }
-//         return res;
-//     }
-// };
