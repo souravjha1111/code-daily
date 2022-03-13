@@ -25,7 +25,6 @@ public:
                     markisland(grid, i, j);
                     res++;
                 }
-        
             }
         }
     return res;
