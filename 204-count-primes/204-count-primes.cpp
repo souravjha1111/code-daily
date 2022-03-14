@@ -1,20 +1,14 @@
 class Solution {
 public:
     int countPrimes(int n) {
-        if(n <= 0)
-            return 0;
-        
-        vector<bool> prime(n , true);
-        prime[1] = false;
-        int count = 0;
-        
-        for(int i = 2 ; i < n ; i++){
-            if(prime[i])
-                count++;
-            
-            for(int j = 2*i ; j < n ; j = j + i)
-                prime[j] = false;
+        vector<bool> seen(n, false);
+        int ans = 0;
+        for (int num = 2; num < n; num++) {
+            if (seen[num]) continue;
+            ans++;
+            for (long mult = (long)num * num; mult < n; mult += num)
+                seen[mult] = true;
         }
-        return count;
+        return ans;
     }
 };
