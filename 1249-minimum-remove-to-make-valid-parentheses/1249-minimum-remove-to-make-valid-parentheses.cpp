@@ -19,12 +19,12 @@ public:
             temp.insert(st.top());
             st.pop();
         }
-        
-        string res="";
-        for(int i=0; i<s.size(); i++){
+        int count =temp.size();
+        for(int i=0, j=0; i<s.size(); i++){
             if(temp.find(i)==temp.end())
-                res+=s[i];
+                s[j++]=s[i];
         }
-        return res;
+        s.erase(s.size()-count, count);
+        return s;
     }
 };
