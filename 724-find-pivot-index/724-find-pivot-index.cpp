@@ -4,10 +4,9 @@ public:
         int totalsum =0;
         for(auto el:nums)
             totalsum+=el;
-        // if(nums.size()==1)
-        //     return 0;
         int sumtillnow = 0;
-        for(int i=0; i<nums.size(); i++){
+        int size = nums.size();
+        for(int i=0; i<size; i++){
             totalsum-=nums[i];
             if(sumtillnow ==totalsum)
                 return i;
