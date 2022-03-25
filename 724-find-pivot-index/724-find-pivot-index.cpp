@@ -1,12 +1,12 @@
 class Solution {
 public:
     int pivotIndex(vector<int>& nums) {
-        double totalsum =0;
+        int totalsum =0;
         for(auto el:nums)
             totalsum+=el;
-        if(nums.size()==1)
-            return 0;
-        double sumtillnow = 0;
+        // if(nums.size()==1)
+        //     return 0;
+        int sumtillnow = 0;
         for(int i=0; i<nums.size(); i++){
             totalsum-=nums[i];
             if(sumtillnow ==totalsum)
