@@ -1,23 +1,23 @@
 class Solution {
 public:
     int twoCitySchedCost(vector<vector<int>>& costs) {
+        int size = costs.size();
         priority_queue<pair<int, int>> pq;
-        for(int i=0; i<costs.size(); i++){
+        for(int i=0; i<size; i++){
             pq.push({costs[i][0] - costs[i][1], i});
         }
         int res =0;
-        int x= costs.size()/2;
+        int x=size;
+        bool toggle = true;
         while(x--){
-            // if(pq.top().first<=0)
+            if(toggle)
             res+=abs(costs[pq.top().second][1]);
-            pq.pop();
-        }
-        x= costs.size()/2;
-        while(x--){
-            // if(pq.top().first<=0)
+            else
             res+=abs(costs[pq.top().second][0]);
+            if(x<=size/2)
+                toggle = false;
             pq.pop();
         }
-        return res;
+      return res;
     }
 };
