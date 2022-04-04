@@ -10,27 +10,29 @@
  */
 class Solution {
 public:
-    int count(ListNode *p)
-    {
-        int l=0;
-        while(p)
-        {
-            l++;
-            p=p->next;
-        }
-        return l;
-    }
     ListNode* swapNodes(ListNode* head, int k) {
-        ListNode* first = head;
-        ListNode* last = head;
-        int count_ = count(head);
-        for(int i=0;i<k-1;i++)
-            first = first->next;
-        for(int i=0;i<count_-k;i++)
-            last = last->next;
-        int temp = first->val;
-        first->val = last->val;
-        last->val = temp;
+        if(head -> next == nullptr){
+            return head;
+        }
+        
+        int length = 0;
+        ListNode *temp = head, *NodeK;
+        while(temp != nullptr){
+            ++length;
+            if(length == k)
+                NodeK = temp;
+            temp = temp -> next;
+        }
+        
+        length = length - k; 
+        temp = head;
+        while(length--){
+            temp = temp -> next;
+        }
+        length = NodeK -> val;
+        NodeK -> val = temp -> val;
+        temp -> val = length;
+        
         return head;
-    }
+    }  
 };
