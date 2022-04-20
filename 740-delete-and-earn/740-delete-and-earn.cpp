@@ -1,31 +1,16 @@
 class Solution {
 public:
-    int dp[20001];
-    int solve(vector<int>& nums, int pos){
-        if(pos>=nums.size()) return 0;
-        if(dp[pos]!=-1) return dp[pos];
-        
-        int cur = nums[pos];
-        int sum = nums[pos];
-        int idx = pos+1;
-        
-        //add all element which is equal to current element
-        while(idx < nums.size() && nums[idx] == cur){
-            sum+=nums[idx];
-            idx++;
-        }
-        
-        //skip all value which is equal to current value + 1;
-        while(idx < nums.size() && nums[idx] == cur+1){
-            idx++;
-        }
-        
-        return dp[pos] = max(sum+solve(nums, idx), solve(nums, pos+1));
-    }
-    
     int deleteAndEarn(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        memset(dp,-1,sizeof(dp));
-        return solve(nums, 0);
+        vector<int> dp(20003,0);
+        int exclude =0, include =0;
+        for(int i=0; i<nums.size(); i++)
+            dp[nums[i]]++;
+        for(int i=0; i<20003; i++){
+            int temp1 = exclude+dp[i]*i;
+            int temp2 = max(exclude, include);
+            include = temp1;
+            exclude = temp2;
+        }
+        return max(exclude, include);
     }
 };
