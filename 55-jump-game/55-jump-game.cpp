@@ -1,21 +1,24 @@
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
-        bool res = true;
+        vector<int> dp(nums.size(),0);
         int size =nums.size();
+        dp[size-1]=0;
+        bool toggle = false;
         if(size==1)
             return true;
-        int mustreach = size-1;
-        for(int i=size-2;0<=i; i--){
-            if(mustreach> i + nums[i]){
-                res = false;
+        int counter =1;
+        
+        for(int i= nums.size()-2; i>=0; i--){
+            if(nums[i]>=counter){
+                toggle = true;
+                counter =1;
+            }
+            else{
+                toggle = false;
+                counter++;
+            }
         }
-            else
-            {
-                                mustreach =i;
-res = true;
-            }                
-        }
-        return res;
+        return toggle;
     }
 };
