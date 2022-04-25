@@ -1,19 +1,19 @@
 class Solution {
 public:
+    vector<int> dp;
     int lengthOfLIS(vector<int>& nums) {
-        vector<int> dp(nums.size()+1,0);
-        dp[0]=1;
-        for(int i=0; i<nums.size(); i++){
-            for(int j=0; j< i; j++){
-                if(nums[j]<nums[i])
-                    dp[i] = max(dp[j], dp[i]);
-            }
-            if(i!=0)
-            dp[i]++;
-        }
-        int maxi = INT_MIN;
-        for(auto el:dp)
-            maxi = max(maxi, el);
-        return maxi;
+        dp.resize(size(nums)+1, -1);
+        return solve(nums, 0, -1);
+    }
+    int solve(vector<int>& nums, int i, int prev_i) {
+        if(i >= size(nums))
+            return 0;
+        if(dp[prev_i+1] != -1)
+            return dp[prev_i+1];
+        int take = 0;
+        int dontTake = solve(nums, i + 1, prev_i);
+        if(prev_i == -1 || nums[i] > nums[prev_i])
+            take = 1 + solve(nums, i + 1, i);
+        return dp[prev_i+1] = max(take, dontTake);
     }
 };
