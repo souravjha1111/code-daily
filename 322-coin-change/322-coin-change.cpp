@@ -18,35 +18,35 @@
 //         return dp[-1];   
 //     }
 // // };
-// class Solution {
-// public:
-//     int coinChange(vector<int>& coins, int n) {
-//         int dp[++n];
-//         dp[0] = 0;
-//         sort(begin(coins), end(coins));
-//         for (int i = 1; i < n; i++) {
-//             dp[i] = INT_MAX;
-//             for (int c: coins) {
-//                 if (i - c < 0)
-//                     break;
-//                 if (dp[i - c] != INT_MAX)
-//                     dp[i] = min(dp[i], 1 + dp[i - c]);
-//             }
-//         }
-//         return dp[--n] == INT_MAX ? -1 : dp[n];
-//     }
-// };
-
 class Solution {
 public:
-int coinChange(vector<int>& coins, int amount) {
-	int n = coins.size();        	
-	vector<int> dp(amount + 1, amount + 1); 
-	dp[0] = 0;
-	for(int currAmount = 1; currAmount <= amount; ++currAmount)
-		for(auto& coin : coins)
-			if(coin <= currAmount)
-			    dp[currAmount] = min(dp[currAmount], 1 + dp[currAmount - coin]);
-	return dp[amount] > amount ? -1 : dp[amount];
+    int coinChange(vector<int>& coins, int n) {
+        int dp[++n];
+        dp[0] = 0;
+        sort(begin(coins), end(coins));
+        for (int i = 1; i < n; i++) {
+            dp[i] = INT_MAX;
+            for (int c: coins) {
+                if (i - c < 0)
+                    break;
+                if (dp[i - c] != INT_MAX)
+                    dp[i] = min(dp[i], 1 + dp[i - c]);
+            }
+        }
+        return dp[--n] == INT_MAX ? -1 : dp[n];
     }
 };
+
+// class Solution {
+// public:
+// int coinChange(vector<int>& coins, int amount) {
+// 	int n = coins.size();        	
+// 	vector<int> dp(amount + 1, amount + 1); 
+// 	dp[0] = 0;
+// 	for(int currAmount = 1; currAmount <= amount; ++currAmount)
+// 		for(auto& coin : coins)
+// 			if(coin <= currAmount)
+// 			    dp[currAmount] = min(dp[currAmount], 1 + dp[currAmount - coin]);
+// 	return dp[amount] > amount ? -1 : dp[amount];
+//     }
+// };
